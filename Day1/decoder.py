@@ -36,17 +36,11 @@ def multipleReplace(text, wordDict):
         text = text.replace(key, wordDict[key])
     return text
 
-string1 = "ninexskpsth5sevennine"
-new_string = multipleReplace(string1,numdict)
-print(new_string)
 def sumStringNum(path):
     sumdigits = 0
     with open(path,"r") as txt:
         for line in txt:
-            line_numbered = line# multipleReplace(line,numdict)
-            #print(line_numbered)
-            digits = list(filter(lambda i: i.isdigit(), line_numbered))
-            #print(digits)
+            digits = list(filter(lambda i: i.isdigit(), line))
             sumdigits += int(str(digits[0])+str(digits[-1]))
         print("Your sum is: " + str(sumdigits))
 
@@ -55,14 +49,12 @@ def sumStringAlphaNum(path):
     with open(path,"r") as txt:
         for line in txt:
             line_numbered = multipleReplace(line,numdict)
-            print(line_numbered)
             digits = list(filter(lambda i: i.isdigit(), line_numbered))
-            print(digits)
             sumdigits += int(str(digits[0])+str(digits[-1]))
         print("Your sum is: " + str(sumdigits))
 
 sumStringNum(".\Day1\\test1.txt")
-
 sumStringAlphaNum(".\Day1\\test2.txt")
+
 sumStringNum(".\Day1\input.txt")
 sumStringAlphaNum(".\Day1\input.txt")
