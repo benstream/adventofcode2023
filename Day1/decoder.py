@@ -17,27 +17,52 @@
 #        sumdigits += int(str(digits[0])+str(digits[-1]))
 #     print("Your sum is: " + str(sumdigits))
 
-sumdigits = 0
+# You need to fill in letter replaced to allow for numbers edged on eachother
+# ie :: eightwo 
 numdict = {
-    'one': '1',
-    'two': '2',
-    'three': '3',
-    'four': '4',
-    'five': '5',
-    'six': '6',
-    'seven': '7',
-    'eight': '8',
-    'nine': '9',
-    'zero': '0'
+    'one': 'o1e',
+    'two': 't2o',
+    'three': 't3e',
+    'four': 'f4r',
+    'five': 'f5e',
+    'six': 's6x',
+    'seven': 's7n',
+    'eight': 'e8t',
+    'nine': 'n9e',
 }
-with open(".\Day1\input.txt","r") as txt:
-    for line in txt:
-       while True:
-        try:
-            break
-        except ValueError:
-            pass   
-       digits = list(filter(lambda i: i.isdigit(), line))
-       sumdigits += int(str(digits[0])+str(digits[-1][-1]))
-    print("Your sum is: " + str(sumdigits))
-       
+
+def multipleReplace(text, wordDict):
+    for key in wordDict:
+        text = text.replace(key, wordDict[key])
+    return text
+
+string1 = "ninexskpsth5sevennine"
+new_string = multipleReplace(string1,numdict)
+print(new_string)
+def sumStringNum(path):
+    sumdigits = 0
+    with open(path,"r") as txt:
+        for line in txt:
+            line_numbered = line# multipleReplace(line,numdict)
+            #print(line_numbered)
+            digits = list(filter(lambda i: i.isdigit(), line_numbered))
+            #print(digits)
+            sumdigits += int(str(digits[0])+str(digits[-1]))
+        print("Your sum is: " + str(sumdigits))
+
+def sumStringAlphaNum(path):
+    sumdigits = 0
+    with open(path,"r") as txt:
+        for line in txt:
+            line_numbered = multipleReplace(line,numdict)
+            print(line_numbered)
+            digits = list(filter(lambda i: i.isdigit(), line_numbered))
+            print(digits)
+            sumdigits += int(str(digits[0])+str(digits[-1]))
+        print("Your sum is: " + str(sumdigits))
+
+sumStringNum(".\Day1\\test1.txt")
+
+sumStringAlphaNum(".\Day1\\test2.txt")
+sumStringNum(".\Day1\input.txt")
+sumStringAlphaNum(".\Day1\input.txt")
